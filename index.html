@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypton Club // Cybersecurity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cyber: {
+                black: '#0a0a0a',
+                dark: '#111111',
+                neon: '#39FF14',
+                dim: '#1b4d24',
+                alert: '#ef4444'
+              }
+            },
+            fontFamily: {
+              mono: ['"Fira Code"', 'monospace'],
+            },
+            animation: {
+              'cursor-blink': 'blink 1s step-start infinite',
+              'glitch': 'glitch 1s linear infinite',
+            },
+            keyframes: {
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              },
+              glitch: {
+                '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                '62%': { transform: 'translate(0,0) skew(5deg)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #e5e5e5;
+        font-family: 'Fira Code', monospace;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #39FF14;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #32d611;
+      }
+      .neon-shadow {
+        box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+      }
+      .neon-text-shadow {
+        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+      }
+
+      /* Markdown Styles */
+      .markdown-content h1 { 
+        font-size: 2rem; 
+        font-weight: 700; 
+        color: #fff; 
+        margin-bottom: 1.5rem; 
+        border-bottom: 1px solid #1b4d24; 
+        padding-bottom: 0.5rem;
+      }
+      .markdown-content h2 { 
+        font-size: 1.5rem; 
+        font-weight: 600; 
+        color: #39FF14; 
+        margin-top: 2rem; 
+        margin-bottom: 1rem; 
+      }
+      .markdown-content h3 { 
+        font-size: 1.25rem; 
+        font-weight: 600; 
+        color: #fff; 
+        margin-top: 1.5rem; 
+        margin-bottom: 0.75rem; 
+      }
+      .markdown-content p { 
+        margin-bottom: 1rem; 
+        line-height: 1.7; 
+        color: #d1d5db; 
+      }
+      .markdown-content ul { 
+        list-style-type: none; 
+        padding-left: 1rem; 
+        margin-bottom: 1rem; 
+      }
+      .markdown-content ul li { 
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .markdown-content ul li::before {
+        content: '>';
+        position: absolute;
+        left: 0;
+        color: #39FF14;
+        font-weight: bold;
+      }
+      .markdown-content pre { 
+        background: #0f0f0f; 
+        padding: 1rem; 
+        border-radius: 0.5rem; 
+        overflow-x: auto; 
+        border: 1px solid #1b4d24; 
+        margin-bottom: 1.5rem; 
+      }
+      .markdown-content code { 
+        font-family: 'Fira Code', monospace; 
+        color: #ef4444; 
+        background: #1a1a1a;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.2rem;
+        font-size: 0.9em;
+      }
+      .markdown-content pre code { 
+        color: #39FF14; 
+        background: transparent;
+        padding: 0;
+      }
+      .markdown-content blockquote {
+        border-left: 4px solid #39FF14;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #9ca3af;
+        margin: 1.5rem 0;
+      }
+      .markdown-content a {
+        color: #39FF14;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .markdown-content a:hover {
+        color: #fff;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-markdown": "https://esm.sh/react-markdown@9?bundle"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
