@@ -3,45 +3,38 @@ import { Achievement } from '../types';
 export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'a1',
-    title: 'National Cyber League',
-    description: 'Placed 1st out of 500+ teams in the Gold Bracket. Demonstrated advanced skills in Log Analysis and Network Traffic Forensics.',
-    year: '2023',
+    title: 'SeaTF',
+    description: 'National-level cybersecurity CTF organized by ACM, IET, and IE at NIT Karnataka. Demonstrated strong skills in reverse engineering, web security, cryptography, and forensics.',
+    year: '2024',
     category: 'competition',
     rank: '1st Place',
-    imageUrl: '/achievements/ncl.png'
+    imageUrl: '/achievements/seatf.png'
   },
   {
     id: 'a2',
-    title: 'HackTheBox University CTF',
-    description: 'Top 10 finish globally. Successfully exploited 15/20 machines including the "Insane" difficulty final boss.',
-    year: '2023',
+    title: 'Veni Vidi Vici CTF',
+    description: 'Capture The Flag competition organized by the Indian Institute of Technology (IIT), Dharwad on January 30–31, 2025.',
+    year: '2025',
     category: 'competition',
-    rank: '8th Global',
-    imageUrl: '/achievements/htb.png'
+    rank: '2nd Place',
+    imageUrl: '/achievements/vvv.png'
   },
   {
     id: 'a3',
-    title: 'NSA Codebreaker Challenge',
-    description: 'Chapter awarded as a Center of Academic Excellence for completing all challenge phases.',
-    year: '2022',
-    category: 'recognition',
-    imageUrl: '/achievements/nsa.png'
+    title: 'ACN Capture The Flag',
+    description: 'Held during Amrita CyberNation 3rd Edition (Sept 11–12, 2024), organized by the Department of Computer Science and Engineering, Amrita School of Computing, Chennai.',
+    year: '2024',
+    category: 'competition',
+    rank: '3rd Place',
+    imageUrl: '/achievements/acn.png'
   },
   {
     id: 'a4',
-    title: 'OSCP Certification Mass-Pass',
-    description: '10 club members successfully obtained their Offensive Security Certified Professional certification in a single summer cohort.',
-    year: '2024',
-    category: 'certification',
-    imageUrl: '/achievements/oscp.png'
-  },
-  {
-    id: 'a5',
-    title: 'DEF CON 31 CTF Qualifiers',
-    description: 'Qualified for the semi-finals in Las Vegas. Solved the critical crypto challenge "Enigma2.0".',
-    year: '2023',
+    title: 'KLE GIT × IITB CTF',
+    description: 'Conducted by IEEE CS, KLE GIT Belgaum in collaboration with the Trust Lab, IIT Bombay on May 15, 2025, at KLE GIT, Belgaum.',
+    year: '2025',
     category: 'competition',
-    rank: 'Semi-Finalist',
-    imageUrl: '/achievements/defcon.png'
+    rank: '3rd Place',
+    imageUrl: '/achievements/kle.png'
   }
 ];

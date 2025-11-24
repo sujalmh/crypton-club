@@ -3,45 +3,45 @@ import { Member } from '../types';
 export const MEMBERS: Member[] = [
   {
     id: 'm1',
-    name: 'Alex "NullPtr" Chen',
+    name: 'Sujal M H',
     role: 'President',
-    bio: 'Senior CS student specializing in network security and infrastructure.',
-    imageUrl: '/members/alex.jpg',
+    bio: 'Leading the club\'s strategic vision and cybersecurity initiatives.',
+    imageUrl: '/members/sujal.jpg',
     socials: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com'
+      linkedin: 'https://linkedin.com',
+      github: 'https://github.com'
     }
   },
   {
     id: 'm2',
-    name: 'Sarah "ZeroDay" Jones',
-    role: 'Vice President',
-    bio: 'CTF Captain. Loves binary exploitation and cryptography challenges.',
-    imageUrl: '/members/sarah.jpg',
+    name: 'Sujnan Kumar',
+    role: 'Tech Lead',
+    bio: 'Expert in technical infrastructure and CTF challenge development.',
+    imageUrl: '/members/sujnan.jpg',
     socials: {
-      github: 'https://github.com',
-      twitter: 'https://twitter.com'
+      linkedin: 'https://linkedin.com',
+      github: 'https://github.com'
     }
   },
   {
     id: 'm3',
-    name: 'Marcus "Root" Johnson',
-    role: 'Workshop Lead',
-    bio: 'Passionate about teaching and open source intelligence (OSINT).',
-    imageUrl: '/members/marcus.jpg',
+    name: 'Yashas Shetty',
+    role: 'Treasurer',
+    bio: 'Managing club resources and sponsorships.',
+    imageUrl: '/members/yashas.jpg',
     socials: {
-      linkedin: 'https://linkedin.com',
-      website: 'https://example.com'
+      linkedin: 'https://linkedin.com'
     }
   },
   {
     id: 'm4',
-    name: 'Emily "Ghost" Davis',
-    role: 'Treasurer',
-    bio: 'Keeping the club funds secure using blockchain technology (just kidding).',
-    imageUrl: '/members/emily.jpg',
+    name: 'Suhan D Shet',
+    role: 'PR Manager',
+    bio: 'Handling public relations, outreach, and community engagement.',
+    imageUrl: '/members/suhan.jpg',
     socials: {
-      github: 'https://github.com'
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com'
     }
   }
 ];
