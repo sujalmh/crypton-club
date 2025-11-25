@@ -21,7 +21,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = (password: string) => {
     // Simple hardcoded credential for demonstration
     // In a real app, this would verify against a backend
-    if (password === 'root' || password === 'admin') {
+    if (password === 'Num3R0n4u7s') {
       setIsAuthenticated(true);
       localStorage.setItem('crypton_auth', 'true');
       return true;

@@ -1,9 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Event, Member, Achievement, BlogPost } from '../types';
-import { EVENTS as INITIAL_EVENTS } from '../data/events';
-import { MEMBERS as INITIAL_MEMBERS } from '../data/members';
-import { ACHIEVEMENTS as INITIAL_ACHIEVEMENTS } from '../data/achievements';
-import { BLOG_POSTS as INITIAL_BLOG_POSTS } from '../data/blog';
 
 interface DataContextType {
   events: Event[];
@@ -30,72 +26,215 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+const API_BASE_URL = 'http://localhost:3001/api';
+
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Initialize state from LocalStorage or fall back to static data
-  const [events, setEvents] = useState<Event[]>(() => {
-    try {
-      const saved = localStorage.getItem('crypton_events');
-      return saved ? JSON.parse(saved) : INITIAL_EVENTS;
-    } catch (e) { return INITIAL_EVENTS; }
-  });
+  const [events, setEvents] = useState<Event[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
-  const [members, setMembers] = useState<Member[]>(() => {
-    try {
-      const saved = localStorage.getItem('crypton_members');
-      return saved ? JSON.parse(saved) : INITIAL_MEMBERS;
-    } catch (e) { return INITIAL_MEMBERS; }
-  });
-
-  const [achievements, setAchievements] = useState<Achievement[]>(() => {
-    try {
-      const saved = localStorage.getItem('crypton_achievements');
-      return saved ? JSON.parse(saved) : INITIAL_ACHIEVEMENTS;
-    } catch (e) { return INITIAL_ACHIEVEMENTS; }
-  });
-
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(() => {
-    try {
-      const saved = localStorage.getItem('crypton_blog');
-      return saved ? JSON.parse(saved) : INITIAL_BLOG_POSTS;
-    } catch (e) { return INITIAL_BLOG_POSTS; }
-  });
-
-  // Persist changes to LocalStorage
-  useEffect(() => { localStorage.setItem('crypton_events', JSON.stringify(events)); }, [events]);
-  useEffect(() => { localStorage.setItem('crypton_members', JSON.stringify(members)); }, [members]);
-  useEffect(() => { localStorage.setItem('crypton_achievements', JSON.stringify(achievements)); }, [achievements]);
-  useEffect(() => { localStorage.setItem('crypton_blog', JSON.stringify(blogPosts)); }, [blogPosts]);
+  // Fetch initial data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [eventsRes, membersRes, achievementsRes, blogRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/events`),
+          fetch(`${API_BASE_URL}/members`),
+          fetch(`${API_BASE_URL}/achievements`),
+          fetch(`${API_BASE_URL}/blog`)
+        ]);
+        
+        setEvents(await eventsRes.json());
+        setMembers(await membersRes.json());
+        setAchievements(await achievementsRes.json());
+        setBlogPosts(await blogRes.json());
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+    
+    fetchData();
+  }, []);
 
   // Event Actions
-  const addEvent = (item: Event) => setEvents(prev => [...prev, item]);
-  const updateEvent = (item: Event) => setEvents(prev => prev.map(i => i.id === item.id ? item : i));
-  const deleteEvent = (id: string) => {
-    console.log('Deleting Event:', id);
-    setEvents(prev => prev.filter(i => String(i.id) !== String(id)));
+  const addEvent = async (item: Event) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/events`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        const newEvent = await res.json();
+        setEvents(prev => [...prev, newEvent]);
+      }
+    } catch (error) {
+      console.error('Failed to add event:', error);
+    }
+  };
+
+  const updateEvent = async (item: Event) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/events/${item.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        setEvents(prev => prev.map(i => i.id === item.id ? item : i));
+      }
+    } catch (error) {
+      console.error('Failed to update event:', error);
+    }
+  };
+
+  const deleteEvent = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/events/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setEvents(prev => prev.filter(i => String(i.id) !== String(id)));
+      }
+    } catch (error) {
+      console.error('Failed to delete event:', error);
+    }
   };
 
   // Member Actions
-  const addMember = (item: Member) => setMembers(prev => [...prev, item]);
-  const updateMember = (item: Member) => setMembers(prev => prev.map(i => i.id === item.id ? item : i));
-  const deleteMember = (id: string) => {
-    console.log('Deleting Member:', id);
-    setMembers(prev => prev.filter(i => String(i.id) !== String(id)));
+  const addMember = async (item: Member) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/members`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        const newMember = await res.json();
+        setMembers(prev => [...prev, newMember]);
+      }
+    } catch (error) {
+      console.error('Failed to add member:', error);
+    }
+  };
+
+  const updateMember = async (item: Member) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/members/${item.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        setMembers(prev => prev.map(i => i.id === item.id ? item : i));
+      }
+    } catch (error) {
+      console.error('Failed to update member:', error);
+    }
+  };
+
+  const deleteMember = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/members/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setMembers(prev => prev.filter(i => String(i.id) !== String(id)));
+      }
+    } catch (error) {
+      console.error('Failed to delete member:', error);
+    }
   };
 
   // Achievement Actions
-  const addAchievement = (item: Achievement) => setAchievements(prev => [...prev, item]);
-  const updateAchievement = (item: Achievement) => setAchievements(prev => prev.map(i => i.id === item.id ? item : i));
-  const deleteAchievement = (id: string) => {
-    console.log('Deleting Achievement:', id);
-    setAchievements(prev => prev.filter(i => String(i.id) !== String(id)));
+  const addAchievement = async (item: Achievement) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/achievements`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        const newAchievement = await res.json();
+        setAchievements(prev => [...prev, newAchievement]);
+      }
+    } catch (error) {
+      console.error('Failed to add achievement:', error);
+    }
+  };
+
+  const updateAchievement = async (item: Achievement) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/achievements/${item.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        setAchievements(prev => prev.map(i => i.id === item.id ? item : i));
+      }
+    } catch (error) {
+      console.error('Failed to update achievement:', error);
+    }
+  };
+
+  const deleteAchievement = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/achievements/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setAchievements(prev => prev.filter(i => String(i.id) !== String(id)));
+      }
+    } catch (error) {
+      console.error('Failed to delete achievement:', error);
+    }
   };
 
   // Blog Actions
-  const addBlogPost = (item: BlogPost) => setBlogPosts(prev => [item, ...prev]); 
-  const updateBlogPost = (item: BlogPost) => setBlogPosts(prev => prev.map(i => i.id === item.id ? item : i));
-  const deleteBlogPost = (id: string) => {
-    console.log('Deleting Blog:', id);
-    setBlogPosts(prev => prev.filter(i => String(i.id) !== String(id)));
+  const addBlogPost = async (item: BlogPost) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/blog`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        const newPost = await res.json();
+        setBlogPosts(prev => [newPost, ...prev]);
+      }
+    } catch (error) {
+      console.error('Failed to add blog post:', error);
+    }
+  };
+
+  const updateBlogPost = async (item: BlogPost) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/blog/${item.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (res.ok) {
+        setBlogPosts(prev => prev.map(i => i.id === item.id ? item : i));
+      }
+    } catch (error) {
+      console.error('Failed to update blog post:', error);
+    }
+  };
+
+  const deleteBlogPost = async (id: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/blog/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setBlogPosts(prev => prev.filter(i => String(i.id) !== String(id)));
+      }
+    } catch (error) {
+      console.error('Failed to delete blog post:', error);
+    }
   };
 
   return (
