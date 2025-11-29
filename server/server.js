@@ -114,9 +114,10 @@ app.post('/api/events', async (req, res) => {
 app.put('/api/events/:id', async (req, res) => {
   try {
     const collection = await getCollection('events');
+    const { _id, ...updateData } = req.body;
     const result = await collection.updateOne(
       { id: req.params.id },
-      { $set: req.body }
+      { $set: updateData }
     );
     
     if (result.matchedCount === 0) {
@@ -167,9 +168,10 @@ app.post('/api/members', async (req, res) => {
 app.put('/api/members/:id', async (req, res) => {
   try {
     const collection = await getCollection('members');
+    const { _id, ...updateData } = req.body;
     const result = await collection.updateOne(
       { id: req.params.id },
-      { $set: req.body }
+      { $set: updateData }
     );
     
     if (result.matchedCount === 0) {
@@ -220,9 +222,10 @@ app.post('/api/achievements', async (req, res) => {
 app.put('/api/achievements/:id', async (req, res) => {
   try {
     const collection = await getCollection('achievements');
+    const { _id, ...updateData } = req.body;
     const result = await collection.updateOne(
       { id: req.params.id },
-      { $set: req.body }
+      { $set: updateData }
     );
     
     if (result.matchedCount === 0) {
@@ -273,9 +276,10 @@ app.post('/api/blog', async (req, res) => {
 app.put('/api/blog/:id', async (req, res) => {
   try {
     const collection = await getCollection('blog');
+    const { _id, ...updateData } = req.body;
     const result = await collection.updateOne(
       { id: req.params.id },
-      { $set: req.body }
+      { $set: updateData }
     );
     
     if (result.matchedCount === 0) {
